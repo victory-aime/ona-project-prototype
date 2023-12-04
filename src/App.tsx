@@ -9,6 +9,7 @@ import './translations';
 const App = () => {
   return (
     <Provider store={store}>
+      
       {/**
        * PersistGate delays the rendering of the app's UI until the persisted state has been retrieved
        * and saved to redux.

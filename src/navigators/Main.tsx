@@ -2,9 +2,8 @@ import React from 'react';
 import {
   Localisation,
   MapExperience,
-  Register,
+  RestaurantDetails,
   SelectCity,
-  SignUpEmail,
   SplashScreen,
   Welcome,
 } from '../screens';
@@ -19,11 +18,13 @@ const MainNavigator = () => {
     <>
       <StatusBar hidden />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Welcome} />
+      <Stack.Screen name="Home" component={Welcome} />
         <Stack.Screen name="Localisation" component={Localisation} />
         <Stack.Screen name="Localisation-not-allowed" component={SelectCity} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="MapExperience" component={MapExperience} />
+        <Stack.Screen name="RestaurantDetails" component={RestaurantDetails} />
+        
       </Stack.Navigator>
     </>
   );

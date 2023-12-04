@@ -1,15 +1,15 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../hooks';
-import { Brand, Partners } from 'Ona/src/components';
+import { Brand, Partners } from '../../components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Welcome = ({ navigation }: any) => {
-  const { Common, Fonts, Gutters, Layout, Images, AppStyles } = useTheme();
+  const { Common, Fonts, Gutters, Layout, Images } = useTheme();
 
   return (
     <View style={[Layout.fill]}>
-      <View style={[Layout.fullSize, AppStyles.container]}>
+      <View style={[Layout.fullSize]}>
         <ImageBackground source={Images.onBoarding} style={[Layout.fullSize]} />
       </View>
       <View

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useTheme } from '../../hooks';
-import { CarretLeft } from 'Ona/src/theme/assets/svg';
+import { CarretLeft } from '../../theme/assets/svg';
 
 const Register = ({ navigation }: any) => {
   const { Common, Fonts, Gutters, Layout, Colors, Images } = useTheme();
@@ -59,6 +59,7 @@ const Register = ({ navigation }: any) => {
                 borderRadius: 12,
                 backgroundColor: Colors.brown,
                 padding: 15,
+                
               },
             ]}
           >

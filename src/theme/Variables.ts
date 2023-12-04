@@ -24,6 +24,7 @@ export const Colors = {
   textWhite: '#FFF',
   textBlack: '#000',
   textBeige: '#F7F6F2',
+  textBrown : '#C38351',
   primary: '#fff',
   second :'#22211F',
   blue:'#5E86F4',

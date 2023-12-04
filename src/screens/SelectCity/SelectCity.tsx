@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../hooks';
 import { useSelector } from 'react-redux';
-import { CarretLeft, Add, Minus, Search } from 'Ona/src/theme/assets/svg';
+import { CarretLeft, Add, Minus, Search } from '../../theme/assets/svg';
 
 const SelectCity = ({ navigation }: any) => {
   const { Colors, Fonts, Layout, Gutters, Common } = useTheme();
@@ -126,7 +126,7 @@ const SelectCity = ({ navigation }: any) => {
                       overflow: 'hidden',
                     },
                   ]}
-                  showsVerticalScrollIndicator={false}
+                  showsVerticalScrollIndicator={true}
                 >
                   {regions.map((region: any) => {
                     if (

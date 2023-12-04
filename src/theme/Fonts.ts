@@ -10,6 +10,10 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
       fontSize: FontSize.tiny,
       color: Colors.white,
     },
+    textTinyBlack: {
+      fontSize: FontSize.tiny,
+      color: Colors.textBlack,
+    },
     textSmall: {
       fontSize: FontSize.small,
       color: Colors.textGray400,
@@ -36,6 +40,11 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
     textMeduimBlack: {
       fontSize: FontSize.meduim,
       color: Colors.textBlack,
+    },
+    textRegularMind: {
+      fontSize: FontSize.regularmid,
+      color: Colors.textBrown,
+      fontWeight : '500'
     },
     textRegular: {
       fontSize: FontSize.regular,

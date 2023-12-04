@@ -88,9 +88,11 @@ export default function ({}: ThemeVariables) {
     fill: {
       flex: 1,
     },
+    flex: { flex: 2 },
     dflex: {
       display: 'flex',
     },
+    flexWrap: { flexWrap: 'wrap' },
     flexGrow: {
       flexGrow: 1,
     },
@@ -110,7 +112,7 @@ export default function ({}: ThemeVariables) {
     fullHeight: {
       height: '100%',
     },
-    specialSize :{ 
+    specialSize: {
       height: '30%',
       width: '30%',
     },

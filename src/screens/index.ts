@@ -6,3 +6,4 @@ export { default as SplashScreen } from './SplashScreen/SplashScreen';
 export { default as Register } from './Register/Register'
 export { default as SignUpEmail } from './SignUpEmail/SignUpEmail'
 export { default as MapExperience } from './MapExperience/MapExperience'
+export { default as RestaurantDetails } from './RestaurantDetails/RestaurantDetails'

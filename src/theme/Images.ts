@@ -8,5 +8,6 @@ export default function ({}: ThemeVariables) {
     maps: require('./assets/images/maps.png'),
     mapExperience: require('./assets/images/mapExperience.png'),
     RegisterBackImage: require('./assets/images/register.png'),
+    FakeImage: require('./assets/images/MockImages/img1.png'),
   };
 }

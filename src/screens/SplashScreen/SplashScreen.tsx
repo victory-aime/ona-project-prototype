@@ -14,7 +14,7 @@ const SplashScreen = ({ navigation, route }: any) => {
       }, 2000),
     );
 
-    navigation.navigate('MapExperience', { zoneName: zoneName });
+    navigation.replace('MapExperience', { zoneName: zoneName });
   };
 
   useEffect(() => {
