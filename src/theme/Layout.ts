@@ -107,7 +107,7 @@ export default function ({}: ThemeVariables) {
       width: '50%',
     },
     halfHeight: {
-      height: '100%',
+      height: '70%',
     },
     fullHeight: {
       height: '100%',

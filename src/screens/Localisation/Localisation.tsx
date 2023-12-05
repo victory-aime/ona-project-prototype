@@ -37,7 +37,7 @@ const Localisation = ({ navigation }: any) => {
 
             <View style={[Gutters.smallHMargin]}>
               <Text style={[Fonts.textCenter, Fonts.textRegularGray]}>
-                It will allow us to show restaurants around you
+                It will allow us to show restaurants around you.
               </Text>
             </View>
             <View>

@@ -19,7 +19,15 @@ const DisplayImage = ({ data, navigation }: any) => {
       ]}
     >
       {data.map((item: any, index: number) => (
-        <View key={index} style={{ marginBottom: 10 }}>
+        <TouchableOpacity
+          key={index}
+          style={{ marginBottom: 10 }}
+          onPress={() =>
+            navigation.navigate('RestaurantDetails', {
+              restaurantName: item.text,
+            })
+          }
+        >
           <View
             style={[
               Layout.relative,
@@ -32,14 +40,10 @@ const DisplayImage = ({ data, navigation }: any) => {
             ]}
           >
             <View>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Localisation-not-allowed')}
-              >
-                <Image
-                  source={defaultImage}
-                  style={{ borderRadius: 12, ...Layout.fullSize }}
-                />
-              </TouchableOpacity>
+              <Image
+                source={defaultImage}
+                style={{ borderRadius: 12, ...Layout.fullSize }}
+              />
 
               <View
                 style={[
@@ -59,7 +63,7 @@ const DisplayImage = ({ data, navigation }: any) => {
               {item.text}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );

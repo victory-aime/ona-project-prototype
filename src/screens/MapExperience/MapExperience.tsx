@@ -219,13 +219,14 @@ const MapExperience = ({ navigation, route }: any) => {
             >
               {restaurantsInZone.length} {snapPointText}
             </Text>
-          
+            <BottomSheetScrollView>
               <DisplayImage
                 data={restaurantsInZone.map((restaurant: any) => ({
                   text: restaurant.name,
                 }))}
+                navigation={navigation}
               />
-     
+            </BottomSheetScrollView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
       </View>

@@ -8,19 +8,30 @@ import {
 } from 'react-native';
 import { useTheme } from '../../hooks';
 import { useSelector } from 'react-redux';
-import { CarretLeft, Add, Minus, Search } from '../../theme/assets/svg';
+import { CarretLeft, Add, Minus } from '../../theme/assets/svg';
+import { selectZoneNames } from '../../store/Regions/regionsSlice';
+import FilterCity from '../../components/FilterCity/FilterCity'; // Assurez-vous de mettre le bon chemin
 
 const SelectCity = ({ navigation }: any) => {
+  // Hooks for theme
   const { Colors, Fonts, Layout, Gutters, Common } = useTheme();
-  const regions = useSelector((state: any) => state.regions);
 
+  // selector for the zone names and regions displayed
+  const regions = useSelector((state: any) => state.regions);
+  const zoneNames = useSelector(selectZoneNames);
+
+  const [isAdded, setIsAdded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<{
     [key: string]: boolean;
   }>({});
+  const [searchText, setSearchText] = useState('');
 
-  const [isAdded, setIsAdded] = useState(false);
+  // Filtrer les noms de zones basés sur le texte de recherche
+  const filteredZoneNames = zoneNames.filter(zoneName =>
+    zoneName.toLowerCase().includes(searchText.toLowerCase()),
+  );
 
   const toggleExpansion = (category: string) => {
     setExpandedCategories({
@@ -57,111 +68,127 @@ const SelectCity = ({ navigation }: any) => {
             <CarretLeft fillColor="black" />
           </TouchableOpacity>
           <Text style={[Fonts.textSmallBlack]}>Pick a city</Text>
-          <View></View>
+          <View />
         </View>
         <View style={[Gutters.smallLMargin, Gutters.smallRMargin]}>
           <TextInput
             style={[
-              Common.textInput,
               Gutters.smallBMargin,
               Gutters.smallTMargin,
-              Common.button.rounded,
-              Common.backgroundPrimary,
+              {
+                borderRadius: 99,
+                height: 48,
+                padding: 16,
+                alignItems: 'center',
+                gap: 8,
+                backgroundColor: 'white',
+              },
             ]}
             placeholder="Search..."
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
           />
         </View>
-        <View style={[Gutters.regularTMargin]}>
-          {['Europe', 'North America', 'Asia', 'Africa / Middle East'].map(
-            category => (
-              <View
-                key={category}
-                style={[
-                  Layout.dflex,
-                  Layout.col,
-                  Gutters.smallTMargin,
-                  Gutters.smallLMargin,
-                  Gutters.smallRMargin,
+        <>
+          {searchText.length > 0 && (
+            <FilterCity
+              filteredItems={filteredZoneNames}
+              onPressItem={handleZonePress}
+            />
+          )}
 
-                  {
-                    borderRadius: 12,
-                    backgroundColor: Colors.beige,
-                    paddingVertical: 16,
-                    paddingHorizontal: 24,
-                  },
-                ]}
-              >
-                <View
-                  style={[
-                    Layout.dflex,
-                    Layout.row,
-                    Gutters.smallHPadding,
-                    Layout.justifyContentBetween,
-                  ]}
-                >
-                  <Text style={[Fonts.textRegularBlack, { fontWeight: '100' }]}>
-                    {category}
-                  </Text>
-                  <TouchableOpacity
-                    onPress={() => {
-                      toggleExpansion(category);
-                      setSelectedCategory(
-                        expandedCategories[category] ? null : category,
-                      );
-                    }}
+          {searchText.length === 0 && (
+            <View style={[Gutters.regularTMargin]}>
+              {['Europe', 'North America', 'Asia', 'Africa / Middle East'].map(
+                category => (
+                  <View
+                    key={category}
                     style={[
                       Layout.dflex,
-                      Layout.row,
-                      Layout.justifyContentBetween,
+                      Layout.col,
+                      Gutters.smallTMargin,
+                      Gutters.smallLMargin,
+                      Gutters.smallRMargin,
+
+                      {
+                        borderRadius: 12,
+                        backgroundColor: Colors.beige,
+                        paddingVertical: 16,
+                        paddingHorizontal: 24,
+                      },
                     ]}
                   >
-                    {isAdded ? <Minus /> : <Add />}
-                  </TouchableOpacity>
-                </View>
+                    <TouchableOpacity
+                      onPress={() => {
+                        toggleExpansion(category);
+                        setSelectedCategory(
+                          expandedCategories[category] ? null : category,
+                        );
+                      }}
+                      style={[
+                        Layout.dflex,
+                        Layout.row,
+                        Gutters.smallHPadding,
+                        Layout.justifyContentBetween,
+                      ]}
+                    >
+                      <Text
+                        style={[Fonts.textRegularBlack, { fontWeight: '100' }]}
+                      >
+                        {category}
+                      </Text>
 
-                <ScrollView
-                  style={[
-                    {
-                      maxHeight: expandedCategories[category] ? 250 : 0,
-                      overflow: 'hidden',
-                    },
-                  ]}
-                  showsVerticalScrollIndicator={true}
-                >
-                  {regions.map((region: any) => {
-                    if (
-                      (selectedCategory === 'North America' &&
-                        region.overall_category === 'AMERICAS') ||
-                      (selectedCategory === 'Asia' &&
-                        region.overall_category === 'ASIA') ||
-                      (selectedCategory === 'Africa / Middle East' &&
-                        region.overall_category === 'MIDDLE EAST / AFRICA') ||
-                      (selectedCategory === 'Europe' &&
-                        region.overall_category === 'EUROPE')
-                    ) {
-                      return (
-                        <TouchableOpacity
-                          style={[Gutters.smallTMargin, Gutters.smallLMargin]}
-                          key={region.zone_name}
-                          onPress={() => handleZonePress(region.zone_name)}
-                        >
-                          <Text
-                            style={[Fonts.textRegularBlack, Fonts.textLeft]}
-                          >
-                            {region.zone_name}
-                          </Text>
-                        </TouchableOpacity>
-                      );
-                    }
-                    return null;
-                  })}
-                </ScrollView>
-              </View>
-            ),
+                      {isAdded ? <Minus /> : <Add />}
+                    </TouchableOpacity>
+
+                    <ScrollView
+                      style={[
+                        {
+                          maxHeight: expandedCategories[category] ? 250 : 0,
+                          overflow: 'hidden',
+                        },
+                      ]}
+                      showsVerticalScrollIndicator={true}
+                    >
+                      {regions.map((region: any) => {
+                        if (
+                          (selectedCategory === 'North America' &&
+                            region.overall_category === 'AMERICAS') ||
+                          (selectedCategory === 'Asia' &&
+                            region.overall_category === 'ASIA') ||
+                          (selectedCategory === 'Africa / Middle East' &&
+                            region.overall_category ===
+                              'MIDDLE EAST / AFRICA') ||
+                          (selectedCategory === 'Europe' &&
+                            region.overall_category === 'EUROPE')
+                        ) {
+                          return (
+                            <TouchableOpacity
+                              style={[
+                                Gutters.smallTMargin,
+                                Gutters.smallLMargin,
+                              ]}
+                              key={region.zone_name}
+                              onPress={() => handleZonePress(region.zone_name)}
+                            >
+                              <Text
+                                style={[Fonts.textRegularBlack, Fonts.textLeft]}
+                              >
+                                {region.zone_name}
+                              </Text>
+                            </TouchableOpacity>
+                          );
+                        }
+                        return null;
+                      })}
+                    </ScrollView>
+                  </View>
+                ),
+              )}
+            </View>
           )}
-        </View>
+        </>
       </View>
-
       <View
         style={{
           bottom: 20,

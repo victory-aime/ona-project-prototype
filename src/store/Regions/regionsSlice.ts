@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, createSelector } from '@reduxjs/toolkit';
 
 const initialRegions = [
   {
@@ -497,6 +497,14 @@ const regionsSlice = createSlice({
     },
   },
 });
+
+// Sélecteur pour obtenir l'état des régions
+const selectRegions = (state: { regions: any }) => state.regions;
+
+// Sélecteur pour obtenir les noms des zones
+export const selectZoneNames = createSelector([selectRegions], regions =>
+  regions.map((region: { zone_name: any }) => region.zone_name),
+);
 
 export const { fetchAllRegions } = regionsSlice.actions;
 export default regionsSlice.reducer;

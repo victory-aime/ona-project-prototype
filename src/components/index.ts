@@ -4,3 +4,4 @@ export { default as onBoarding } from './OnBoarding/OnBoarding';
 export { default as ModalCompponent } from './Modal/Modal';
 export { default as Maps } from './Maps/Maps';
 export { default as DisplayImage } from './DisplayImage/DisplayImage';
+export { default as FilterCity } from './FilterCity/FilterCity';
